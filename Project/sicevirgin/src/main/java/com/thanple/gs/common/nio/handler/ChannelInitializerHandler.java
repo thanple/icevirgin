@@ -16,7 +16,7 @@ public class ChannelInitializerHandler extends ChannelInitializer<SocketChannel>
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ch.pipeline().addLast(new ProtobufVarint32FrameDecoder())
-//                .addLast(new MyProtobufDecoder()) //自定义Protobuf解码器
+                .addLast(new MyProtobufDecoder()) //自定义Protobuf解码器
                 .addLast(new ProtobufVarint32LengthFieldPrepender())    //添加32位int表示报文的长度
                 .addLast(new MyProtobufEncoder()) //自定义Protobuf编码器
                 .addLast(new ServerHandler());//自定义handler处理消息

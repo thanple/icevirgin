@@ -1,7 +1,7 @@
 package com.thanple.gs.common.provider;
 
 import com.thanple.gs.common.util.CommonUtil;
-import com.thanple.gs.generator.CreateProtocolUtil;
+import com.thanple.gs.generator.CreateProtocol;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -47,7 +47,7 @@ public class ProtocolCreator {
             if(fileName.endsWith(".proto")){
 
                 //通过protobuf直接生成java协议文件
-                CreateProtocolUtil.createCmdProtocol(each.getParent(),each.getName());
+                CreateProtocol.createCmdProtocol(each.getParent(),each.getName());
 
                 //生成业务协议java文件
                 String fileNameWithoutPro = each.getName().substring(0,each.getName().indexOf(".proto"));
@@ -57,7 +57,7 @@ public class ProtocolCreator {
                 String simpleCls = CommonUtil.getSimpleNameByClassName(userCls);
                 String dic = CommonUtil.getDitionaryByPackage(packagez);
 
-                CreateProtocolUtil.createUserProtocol(ConfigConst.CREATE_PROTOCOL_PACKAGE,dic,packagez,simpleCls);
+                CreateProtocol.createUserProtocol(ConfigConst.CREATE_PROTOCOL_PACKAGE,dic,packagez,simpleCls);
 
             }
         }

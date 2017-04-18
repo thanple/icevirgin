@@ -1,4 +1,4 @@
-option java_package = "com.thanple.gameserver.framework.common.nio.protocol";
+option java_package = "com.thanple.gs.common.nio.manager";
 option java_outer_classname="_GameServerSMsg";
 
 message GameServerSMsg {

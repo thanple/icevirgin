@@ -34,7 +34,7 @@ public class ProtocolLoader {
     @Data
     public static class Protocol {
         private int id;
-//        Class<? extends com.thanple.gameserver.framework.common.nio.protocol.Protocol> user;    //自定义的业务协议类
+        Class<? extends com.thanple.gs.common.nio.manager.Protocol> user;    //自定义的业务协议类
         Class<? extends MessageLite> create;    //protobuf直接生成的协议类
     }
 
@@ -66,7 +66,7 @@ public class ProtocolLoader {
                 protocol.setId(i);
                 try {
                     protocol.setCreate((Class<MessageLite>)Class.forName(ConfigConst.CREATE_PROTOCOL_PACKAGE+"._"+classzName+"$"+classzName));
-//                    protocol.setUser((Class<com.thanple.gameserver.framework.common.nio.protocol.Protocol>)Class.forName(userCls));
+                    protocol.setUser((Class<com.thanple.gs.common.nio.manager.Protocol>)Class.forName(userCls));
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }

@@ -2,7 +2,10 @@ package com.thanple.gs.common.nio.handler;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.MessageLite;
+import com.thanple.gs.common.nio.manager.Protocol;
+import com.thanple.gs.common.nio.manager._GameServerCMsg;
 import com.thanple.gs.common.provider.ProtocolLoader;
+import com.thanple.gs.common.util.ExecutorUtil;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -20,7 +23,7 @@ public class ServerHandler extends ChannelHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
-       /* //先使用万能消息模板接收消息
+        //先使用万能消息模板接收消息
         _GameServerCMsg.GameServerCMsg clientMsg = (_GameServerCMsg.GameServerCMsg)msg;
         int id = clientMsg.getId();
         ByteString data = clientMsg.getMsg();
@@ -43,7 +46,7 @@ public class ServerHandler extends ChannelHandlerAdapter {
                 obj.process(ctx);
             }
         });
-*/
+
 
 //        ChannelFuture future = ctx.writeAndFlush(build());
         //发送数据之后，我们手动关闭channel，这个关闭是异步的，当数据发送完毕后执行。

@@ -29,16 +29,16 @@ public class ConfigConst {
     }
 
     //protobuf直接生成的java文件包名
-    public static final String CREATE_PROTOCOL_PACKAGE = "com.thanple.gameserver.framework.common.nio.protocol";
+    public static final String CREATE_PROTOCOL_PACKAGE = "com.thanple.gs.common.nio.protocol";
 
 
     //业务协议文件属性
     public static final String USER_PROTOCOL_PROPERTIES_PATH =
-            Constant.Path.RESOURCE_ROOT_PATH + "/com/thanple/gameserver/framework/msg.protocol.xml";
+            Constant.Path.RESOURCE_ROOT_PATH + "/msg.protocol.xml";
 
     //protobuf脚本所在文件夹
     public static final String DIR_PROTOBUFS =
-            Constant.Path.RESOURCE_ROOT_PATH + "/com/thanple/gameserver/framework/protobufs";
+            Constant.Path.RESOURCE_ROOT_PATH + "/protobuf";
 
 
     //协议类型开始号码

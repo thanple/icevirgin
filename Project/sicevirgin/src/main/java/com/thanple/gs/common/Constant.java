@@ -18,15 +18,16 @@ public class Constant {
         // /F:/IdeaProjects/ThinkingInWorld/target/classes/
         public static final String RUN_CLASS_PATH = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 
-        //tools目录
-        public static final String TOOLS_PATH = ROOT_PATH + "/tools";
-        public static final String TOOL_PROTOC = TOOLS_PATH + "/protoc.exe";
-
         //src目录下
         public static final String SRC_ROOT_PATH = ROOT_PATH + "/src/main/java";
 
         //resource目录下
         public static final String RESOURCE_ROOT_PATH = ROOT_PATH + "/src/main/resources";
+
+
+        //tools目录
+        public static final String TOOL_PROTOC = RESOURCE_ROOT_PATH + "/protoc.exe";
+
     }
 
     public static void main(String[] args) {

@@ -3,6 +3,7 @@ package com.thanple.gs.common.nio.handler;
 import com.google.protobuf.ExtensionRegistry;
 import com.google.protobuf.ExtensionRegistryLite;
 import com.google.protobuf.MessageLite;
+import com.thanple.gs.common.nio.manager._GameServerCMsg;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
@@ -16,9 +17,9 @@ public class MyProtobufDecoder extends ProtobufDecoder{
     public MyProtobufDecoder(MessageLite prototype) {
         super(prototype);
     }
-//    public MyProtobufDecoder(){
-//        super(_GameServerCMsg.GameServerCMsg.getDefaultInstance());   //使用统一解码器GameServerCMsg
-//    }
+    public MyProtobufDecoder(){
+        super(_GameServerCMsg.GameServerCMsg.getDefaultInstance());   //使用统一解码器GameServerCMsg
+    }
 
 
     public MyProtobufDecoder(MessageLite prototype, ExtensionRegistry extensionRegistry) {
