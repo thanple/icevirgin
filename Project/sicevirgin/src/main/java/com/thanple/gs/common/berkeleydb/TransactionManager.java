@@ -23,7 +23,7 @@ public class TransactionManager {
     };
 
     public static void clearResults(){
-        current.remove();
+        current.set(null);
         results.get().clear();
     }
 

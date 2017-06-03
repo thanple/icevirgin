@@ -17,7 +17,7 @@ public abstract class Protocol <T extends com.google.protobuf.MessageLite>{
         this.protocolBean = msg;
     }
 
-    protected <V extends com.google.protobuf.MessageLite> void send(
+    public static <V extends com.google.protobuf.MessageLite> void send(
             io.netty.channel.ChannelHandlerContext ctx,
             V serverMsg){
 
@@ -26,6 +26,7 @@ public abstract class Protocol <T extends com.google.protobuf.MessageLite>{
         builder.setId(ProtocolLoader.getInstance().getClassProtocolmap().get(serverMsg.getClass().getSimpleName()));
         builder.setMsg(serverMsg.toByteString());
 
+        System.out.print("[协议"+serverMsg.getClass() + "] " + serverMsg);
         //写入通道
         ctx.writeAndFlush(builder.build());
     }

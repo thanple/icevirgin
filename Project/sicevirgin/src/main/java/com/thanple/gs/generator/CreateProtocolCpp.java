@@ -24,7 +24,7 @@ public class CreateProtocolCpp {
         String strCmd = String.format("%s -I=%s --cpp_out=%s %s",
                 protocExe,
                 protoFilePath,
-                "F:\\IdeaProjects\\icevirgin\\Project\\cicevirgin\\protocol",
+                "F:\\IdeaProjects\\icevirgin\\Project\\cicevirgin\\Classes\\protocol",
                 protoFilePath+"/"+protoFile);
         //"d:/dev/protobuf-master/src/protoc.exe -I=./proto --java_out=./src/main/java ./proto/"+ protoFile;
 

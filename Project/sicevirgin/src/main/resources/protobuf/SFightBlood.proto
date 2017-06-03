@@ -1,0 +1,13 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_SFightBlood";
+
+message SFightBlood {
+  required int32 fighthType = 1;
+
+  message FighterInfo {
+    required int32 id = 1;
+    required int32 blood = 2;
+  }
+
+  repeated FighterInfo info = 2;
+}

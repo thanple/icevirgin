@@ -44,4 +44,7 @@ public class ConfigConst {
     //协议类型开始号码
     public static final int Protocol_Type_Start_Num = 1001;
 
+    //服务器监听端口号
+    public static final int PORT = 8080;
+
 }

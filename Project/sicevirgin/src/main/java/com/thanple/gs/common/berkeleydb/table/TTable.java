@@ -18,6 +18,8 @@ public abstract class TTable<T extends Serializable> extends AccessTemplate<Long
         super(table);
     }
 
+
+
     /*
    * 插入不允许重复
    * */
@@ -26,6 +28,7 @@ public abstract class TTable<T extends Serializable> extends AccessTemplate<Long
         if(null != this.select(key))   {
             BerkeleyDataAccessException.throwMe(String.format("insert %s key=%s failed: key has been exsited!",value.toString(), key));
         }
+        LockKeysUtil.saveInThread(this,key,value);    //保存需要更新的数据的一个引用
         return super.insert(key,value, TransactionManager.currentTransaction());
     }
 

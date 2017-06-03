@@ -1,5 +1,7 @@
 package com.thanple.gs.app.person1.msg;
 
+import com.thanple.gs.common.berkeleydb.Procedure;
+
 /**
  * auto created by CreateProtocol
  * 2017-04-18 21:37:03
@@ -16,6 +18,14 @@ public class CPerson1 extends
 
     @Override
     public void process(io.netty.channel.ChannelHandlerContext ctx) {
-        System.out.println(protocolBean);
+        new Procedure() {
+            @Override
+            protected boolean process() {
+
+
+
+                return true;
+            }
+        }.submit();
     }
 }

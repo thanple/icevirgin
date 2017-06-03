@@ -1,6 +1,7 @@
 package com.thanple.gs.common.nio.manager;
 
 import com.thanple.gs.common.nio.handler.ChannelInitializerHandler;
+import com.thanple.gs.common.provider.ConfigConst;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -30,8 +31,8 @@ public class NettyServerManager {
                     .childHandler(new ChannelInitializerHandler())  //自定义ChannelHandler，Handler的处理入口类
                     .childOption(ChannelOption.TCP_NODELAY,true);
             System.out.println("begin");
-            //bind到本地的18080端口
-            ChannelFuture future = bootstrap.bind(18080).sync();
+            //bind到本地的8080端口
+            ChannelFuture future = bootstrap.bind(ConfigConst.PORT).sync();
             //阻塞，直到channel.close
             future.channel().closeFuture().sync();
             System.out.println("end");

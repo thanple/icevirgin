@@ -73,6 +73,8 @@ public class ProtocolLoader {
 
                 protocolMap.put(protocolNum,protocol);
                 classProtocolmap.put(protocol.getCreate().getSimpleName(),protocolNum);
+
+                System.out.println("读取协议["+userCls+"," + protocolNum + "]"+"完成...");
                 protocolNum++;
             }
         }

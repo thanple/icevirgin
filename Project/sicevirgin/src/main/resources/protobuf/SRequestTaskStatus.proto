@@ -1,0 +1,13 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_SRequestTaskStatus";
+
+message SRequestTaskStatus {
+  enum Status {
+    NOT_START = 0;
+    OPENING = 1;
+    FINISH = 2;
+  }
+  required int32 type = 1;
+  required Status status = 2;
+
+}

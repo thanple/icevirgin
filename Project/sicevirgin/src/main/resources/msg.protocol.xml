@@ -5,4 +5,30 @@
     <Protocol>com.thanple.gs.app.person2.msg.CPerson2</Protocol>
     <Protocol>com.thanple.gs.app.person1.msg.SPerson1</Protocol>
     <Protocol>com.thanple.gs.app.person2.msg.SPerson2</Protocol>
+
+
+	<Protocol>com.thanple.gs.app.chat.msg.CChatMsg</Protocol>
+	<Protocol>com.thanple.gs.app.chat.msg.SChatMsg</Protocol> <!-- 1006 -->
+	<Protocol>com.thanple.gs.app.chat.msg.SToastMsg</Protocol>
+	<Protocol>com.thanple.gs.app.fight.msg.CFight</Protocol> <!-- 1008 -->
+	<Protocol>com.thanple.gs.app.fight.msg.CRequestFight</Protocol>
+	<Protocol>com.thanple.gs.app.fight.msg.SFightMonsterInfo</Protocol><!-- 1010 -->
+	<Protocol>com.thanple.gs.app.fight.msg.SFightBlood</Protocol><!-- 1011 -->
+	<Protocol>com.thanple.gs.app.user.msg.CRequestUserInfo</Protocol><!-- 1012 -->
+	<Protocol>com.thanple.gs.app.user.msg.SRequestUserInfo</Protocol><!-- 1013 -->
+
+	<Protocol>com.thanple.gs.app.task.msg.CRequestTaskStatus</Protocol><!-- 1014 -->
+	<Protocol>com.thanple.gs.app.task.msg.SRequestTaskStatus</Protocol><!-- 1015 -->
+
+	<Protocol>com.thanple.gs.app.item.msg.CBuy</Protocol><!-- 1016 -->
+	<Protocol>com.thanple.gs.app.rank.msg.CRequestRank</Protocol><!-- 1017 -->
+	<Protocol>com.thanple.gs.app.rank.msg.SRequestRank</Protocol><!-- 1018 -->
+
+	<Protocol>com.thanple.gs.app.session.msg.CCreateRole</Protocol><!-- 1019 -->
+
+	<Protocol>com.thanple.gs.app.session.msg.CLogin</Protocol><!-- 1020 -->
+	<Protocol>com.thanple.gs.app.session.msg.SLogin</Protocol><!-- 1021 -->
+
+
+
 </Coder>

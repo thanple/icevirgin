@@ -5,6 +5,7 @@ import com.thanple.gs.common.nio.manager._GameServerCMsg;
 import com.thanple.gs.common.nio.manager._GameServerSMsg;
 import com.thanple.gs.common.nio.protocol._CPerson1;
 import com.thanple.gs.common.nio.protocol._SPerson1;
+import com.thanple.gs.common.provider.ConfigConst;
 import com.thanple.gs.common.provider.ProtocolLoader;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -33,6 +34,10 @@ public class NIOClientDemo1 {
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             //当channel就绪后，我们首先通过client发送一个数据。
+            ctx.writeAndFlush(build());
+
+            Thread.sleep(2000);
+
             ctx.writeAndFlush(build());
         }
 
@@ -104,7 +109,7 @@ public class NIOClientDemo1 {
                                     .addLast(new ProtobufClientHandler());
                         }
                     });
-            ChannelFuture future = bootstrap.connect(new InetSocketAddress("127.0.0.1", 18080));
+            ChannelFuture future = bootstrap.connect(new InetSocketAddress("127.0.0.1", ConfigConst.PORT));
             System.out.println("begin");
             future.channel().closeFuture().sync();
             System.out.println("Closed");

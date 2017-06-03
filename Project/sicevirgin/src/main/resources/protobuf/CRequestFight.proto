@@ -1,0 +1,7 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_CRequestFight";
+
+message CRequestFight {
+  required int32 fighthType = 1;
+  required int32 fighthId = 2;
+}
