@@ -1,0 +1,6 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_CRequestTaskStatus";
+
+message CRequestTaskStatus {
+	required int32 type = 1;
+}

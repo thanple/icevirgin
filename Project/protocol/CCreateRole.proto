@@ -1,0 +1,11 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_CCreateRole";
+
+message CCreateRole {
+  required string name = 1;
+  required string password = 2;
+  required string number = 3;
+  required int32 hair = 4;
+  required int32 body = 5;
+  required int32 weapon = 6;
+}

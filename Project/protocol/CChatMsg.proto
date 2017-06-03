@@ -1,0 +1,6 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_CChatMsg";
+
+message CChatMsg {
+  required string msg = 1;
+}

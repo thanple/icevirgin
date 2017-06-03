@@ -1,0 +1,6 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_SRequestRank";
+
+message SRequestRank {
+   required string name = 1;
+}

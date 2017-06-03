@@ -1,0 +1,8 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_CFight";
+
+message CFight {
+  required int32 fighthType = 1;
+  required int32 skillType = 2;
+  required int32 fighthId = 3;
+}
