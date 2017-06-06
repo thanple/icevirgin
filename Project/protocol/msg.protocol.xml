@@ -29,6 +29,11 @@
 	<Protocol>com.thanple.gs.app.session.msg.CLogin</Protocol><!-- 1020 -->
 	<Protocol>com.thanple.gs.app.session.msg.SLogin</Protocol><!-- 1021 -->
 
+	<Protocol>com.thanple.gs.app.session.msg.SAddCharacter</Protocol><!-- 1022 -->
+	<Protocol>com.thanple.gs.app.session.msg.SRemoveCharacter</Protocol><!-- 1023 -->
+	<Protocol>com.thanple.gs.app.session.msg.CRequestAddCharacter</Protocol><!-- 1024 -->
+	<Protocol>com.thanple.gs.app.session.msg.SCharacterPos</Protocol><!-- 1025 -->
+	<Protocol>com.thanple.gs.app.session.msg.CCharacterPos</Protocol><!-- 1026 -->
 
 
 </Coder>

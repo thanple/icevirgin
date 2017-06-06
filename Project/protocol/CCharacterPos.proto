@@ -1,0 +1,12 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_CCharacterPos";
+
+message CCharacterPos {
+
+
+  required float x = 1;
+  required float y = 2;
+  required int32 direction = 3;
+  required int32 status = 4;
+
+}

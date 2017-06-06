@@ -1,0 +1,6 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_SRemoveCharacter";
+
+message SRemoveCharacter {
+	required int32 id = 1;
+}

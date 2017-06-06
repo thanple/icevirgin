@@ -1,0 +1,13 @@
+option java_package = "com.thanple.gs.common.nio.protocol";
+option java_outer_classname="_SCharacterPos";
+
+message SCharacterPos {
+
+  required int32 id = 1;
+  required float x = 2;
+  required float y = 3;
+  required int32 direction = 4;
+  required int32 status = 5;
+
+
+}
