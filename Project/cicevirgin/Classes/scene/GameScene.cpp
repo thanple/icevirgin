@@ -2,6 +2,8 @@
 #include "util\MyProtoSocket.h"
 #include "protocol\CRequestUserInfo.pb.h"
 #include "protocol\CRequestTaskStatus.pb.h"
+#include "protocol\CRequestAddCharacter.pb.h"
+#include "protocol\CCharacterPos.pb.h"
 
 static GameScene * _instce = NULL;
 GameScene * GameScene::getInstance()
@@ -11,6 +13,7 @@ GameScene * GameScene::getInstance()
 GameScene::GameScene() :gameUI(NULL), bgMap(NULL), player(NULL)
 {
 	userBean.set_id(-1);
+	removeCharacter.set_id(-1);
 }
 GameScene::~GameScene()
 {
@@ -32,7 +35,8 @@ bool GameScene::init()
 	//这个player还是加到map的孩子节点吧，算相对坐标省事
 	//this->addChild(player);
 	player = Player::sharePlayer();
-	player->setPosition(bgMap->getPlayerBornPoint().getCCPointValue());
+	//player->setPosition(bgMap->getPlayerBornPoint().getCCPointValue());
+	player->setPosition(3000,1800);
 	player->setTag(MAP_INCLUDE_USER);
 	bgMap->getMap()->addChild(player);	//这里一点要先addChild，否则会被cocos2d垃圾回收机制回收
 
@@ -83,6 +87,9 @@ bool GameScene::init()
 	//定时更新
 	this->schedule(schedule_selector(GameScene::updateScene, 1.6f));
 
+	//更新其他玩家的数据同步
+	this->schedule(schedule_selector(GameScene::updateOtherCharacters, 1.8f));
+
 
 	//加载背景音乐
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(ResourceProvider::MUSIC::GAME_SCENE_MUSIC);
@@ -91,6 +98,71 @@ bool GameScene::init()
 
 	_instce = this;
 	return true;
+}
+
+void GameScene::updateOtherCharacters(float dt)
+{
+	
+	//在场景中增加角色
+	int count = 0;
+	for (::google::protobuf::RepeatedPtrField<::SAddCharacter_CharacterItem>::const_iterator & it
+		 = addCharacter.characters().begin(); it != addCharacter.characters().end(); it++)
+	{
+		::SAddCharacter_CharacterItem item = * it;
+		if (item.id() > 0 && item.id() != userBean.id() && !charactersMap[item.id()])
+		{
+			Character * pCharacter = Character::create();
+			pCharacter->pBody->setFigureId(item.body());
+			pCharacter->pHair->setFigureId(item.hair());
+			pCharacter->pWeapon->setFigureId(item.weapon());
+			pCharacter->setIState(CharacterStateType::FStateStand);
+			pCharacter->setPosition(3000, 1800);
+
+			bgMap->getMap()->addChild(pCharacter);
+			charactersMap[item.id()] = pCharacter;
+		}
+		count++;
+	}
+	if (count > 0)
+	{
+		addCharacter = SAddCharacter();
+	}
+
+	//更新角色坐标
+	if (characterPos.id() > 0)
+	{
+		Character * pCharacter = charactersMap[characterPos.id()];
+		if (pCharacter)
+		{
+			pCharacter->setPosition(characterPos.x(), characterPos.y());
+			if (pCharacter->getIState()->getStateType() != characterPos.status())
+			{
+				pCharacter->setIState(CharacterStateType(characterPos.status()) );
+			}
+			pCharacter->setDirectionType(CharacterDirectionType(characterPos.direction() ));
+
+			characterPos.set_id(-1);
+		}
+
+	}
+
+
+	//删除场景中的角色
+	if (removeCharacter.id() > 0)
+	{
+		Character * pCharacter = charactersMap[removeCharacter.id()];
+		if (pCharacter)
+		{
+			pCharacter->removeFromParentAndCleanup(true);
+			//charactersMap[removeCharacter.id()] = NULL;
+			map<int, Character *>::iterator pos = charactersMap.find(removeCharacter.id());
+			if (pos != charactersMap.end())
+			{
+				charactersMap.erase(pos);
+			}
+			removeCharacter.set_id(-1);
+		}
+	}
 }
 
 void GameScene::updateScene(float dt)
@@ -109,6 +181,10 @@ void GameScene::updateScene(float dt)
 		player->setIState(CharacterStateType::FStateStand);
 		this->updatePlayerCenter();
 
+		//自己角色好了再请求其他玩家的数据
+		CRequestAddCharacter addCharacterRequest;
+		MyProtoSocket::send(1024, addCharacterRequest.SerializeAsString());
+
 
 		auto node = gameUI->getRootNode();
 		Text * Name = dynamic_cast<Text*>(node->getChildByName("Name"));
@@ -120,6 +196,17 @@ void GameScene::updateScene(float dt)
 	{
 		//请求user数据
 		MyProtoSocket::send(1012, CRequestUserInfo().SerializeAsString());
+	}
+	else
+	{
+		CCharacterPos characterPos;
+		characterPos.set_direction(player->getDirectionType());
+		Point p = player->getPosition();
+		characterPos.set_x(p.x);
+		characterPos.set_y(p.y);
+		characterPos.set_status(player->getIState()->getStateType());
+
+		MyProtoSocket::send(1026, characterPos.SerializeAsString());
 	}
 
 	if (bgMap->getMap()->getChildByTag(MAP_INCLUDE_USER) == NULL)

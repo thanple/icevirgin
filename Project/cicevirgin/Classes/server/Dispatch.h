@@ -8,6 +8,10 @@
 #include "_SRequestTaskStatus.h";
 #include "_SRequestRank.h"
 #include "_SLogin.h"
+#include "_SAddCharacter.h"
+#include "_SRemoveCharacter.h"
+#include "_CharacterPos.h"
+
 
 class Dispatch
 {
@@ -75,6 +79,30 @@ public:
 			serMsg.ParseFromString(data);
 			
 			_SLogin().process(serMsg);
+		}
+
+		else if (id == 1022)
+		{
+			SAddCharacter serMsg;
+			serMsg.ParseFromString(data);
+
+			_SAddCharacter().process(serMsg);
+		}
+
+		else if (id == 1023)
+		{
+			SRemoveCharacter serMsg;
+			serMsg.ParseFromString(data);
+
+			_SRemoveCharacter().process(serMsg);
+		}
+
+		else if (id == 1025)
+		{
+			SCharacterPos serMsg;
+			serMsg.ParseFromString(data);
+
+			_CharacterPos().process(serMsg);
 		}
 	}
 };
