@@ -4,6 +4,7 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.MessageLite;
 import com.thanple.gs.app.session.user.ISession;
 import com.thanple.gs.app.session.user.Onlines;
+import com.thanple.gs.app.session.user.PRemoveCharacter;
 import com.thanple.gs.app.session.user.Session;
 import com.thanple.gs.app.user.UserConst;
 import com.thanple.gs.common.berkeleydb.Procedure;
@@ -107,6 +108,10 @@ public class ServerHandler extends ChannelHandlerAdapter {
                     User user = TableLoader.getTableInstance(UserTable.class).select(Onlines.getSessionUser().get(new Session((ctx))));
                     System.out.println("[离线]:玩家"+user+" 已经下线...");
                     Onlines.removeUser(user.getId());
+
+                    //通知下线的玩家数据给上线玩家，以终止数据同步
+                    pexecuteWhileCommit(new PRemoveCharacter(user.getId()));
+
                     return true;
                 }
             }.submit();

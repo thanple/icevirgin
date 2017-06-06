@@ -2,6 +2,7 @@ package com.thanple.gs.app.session.msg;
 
 import com.thanple.gs.app.chat.toast.ToastUtil;
 import com.thanple.gs.app.session.user.Onlines;
+import com.thanple.gs.app.session.user.PSendOnlineCharacters;
 import com.thanple.gs.app.session.user.Session;
 import com.thanple.gs.common.berkeleydb.Procedure;
 import com.thanple.gs.common.berkeleydb.entity.PropertiesMap;
@@ -65,6 +66,9 @@ public class CLogin extends
                 ToastUtil.show(roleId,"登录成功");
                 _SLogin.SLogin.Builder slogin = _SLogin.SLogin.newBuilder();
                 Protocol.send(ctx,slogin.build());
+
+                //广播上线玩家的消息
+                pexecuteWhileCommit(new PSendOnlineCharacters());
 
                 return true;
             }
