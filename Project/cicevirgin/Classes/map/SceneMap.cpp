@@ -32,6 +32,7 @@ bool SceneMap::init()
 
 	//加载地图矩阵
 	CCTMXLayer * tmxLayer = _tileMap->layerNamed("barrier");
+	tmxLayer->setVisible(false);
 	Size mapSize = this->_tileMap->getMapSize();	//多少块
 	Size tileSize = this->_tileMap->getTileSize();	//每块的像素
 	map = new unsigned char*[(int)mapSize.height];

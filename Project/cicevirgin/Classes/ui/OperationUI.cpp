@@ -65,6 +65,11 @@ bool OperationUI::init()
 	Button * onTaskShow = dynamic_cast<Button*>(rootNode->getChildByName("Task"));
 	onTaskShow->addTouchEventListener(CC_CALLBACK_2(OperationUI::onTaskShow, this));
 
+	//pvp¾º¼¼
+	Button * onPvpShow = dynamic_cast<Button*>(rootNode->getChildByName("Sports"));
+	onPvpShow->addTouchEventListener(CC_CALLBACK_2(OperationUI::onPvpShow, this));
+
+
 	_instacne_operatUI = this;
 	//UI2::_operationUI_insance = this;
 
@@ -175,4 +180,10 @@ void OperationUI::onTaskShow(Ref* pSender, Widget::TouchEventType type)
 {
 	if (type != Widget::TouchEventType::BEGAN)	return;
 	GameInfoUI::getInstance()->getTaskUI()->displayModal();
+}
+
+void OperationUI::onPvpShow(Ref* pSender, Widget::TouchEventType type)
+{
+	if (type != Widget::TouchEventType::BEGAN)	return;
+	GameInfoUI::getInstance()->getPvpShowUI()->displayModal();
 }

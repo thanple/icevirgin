@@ -11,7 +11,7 @@ GameInfoUI * GameInfoUI::getInstance()
 }
 
 GameInfoUI::GameInfoUI() : m_npcUI(NULL), m_operUI(NULL), m_shopUI(NULL),
-m_RankUI(NULL), m_RoleShowUI(NULL), m_taskUI(NULL)
+m_RankUI(NULL), m_RoleShowUI(NULL), m_taskUI(NULL), m_pvpShowUI(NULL)
 {
 
 }
@@ -61,6 +61,10 @@ bool GameInfoUI::init()
 	m_taskUI = TaskUI::create();
 	this->addChild(m_taskUI);
 
+	//pvp
+	m_pvpShowUI = PvpShowUI::create();
+	this->addChild(m_pvpShowUI);
+
 
 	_instance = this;
 	return true;
@@ -86,5 +90,6 @@ void GameInfoUI::onShowCenter(Ref* pSender, Widget::TouchEventType type)
 bool GameInfoUI::isModal()
 {
 	return m_npcUI->getIsShow() || m_shopUI->getIsShow() || m_RankUI->getIsShow()
-		|| m_RoleShowUI->getIsShow() || m_taskUI->getIsShow();
+		|| m_RoleShowUI->getIsShow() || m_taskUI->getIsShow()
+		|| m_pvpShowUI->getIsShow();
 }

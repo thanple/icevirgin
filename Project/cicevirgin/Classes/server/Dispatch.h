@@ -5,12 +5,16 @@
 #include "_SFightMonsterInfo.h"
 #include "_SFightBlood.h"
 #include "_SRequestUserInfo.h"
-#include "_SRequestTaskStatus.h";
+#include "_SRequestTaskStatus.h"
 #include "_SRequestRank.h"
 #include "_SLogin.h"
 #include "_SAddCharacter.h"
 #include "_SRemoveCharacter.h"
 #include "_CharacterPos.h"
+#include "_SRequestPvpRooms.h"
+#include "_SEnterPvpRoom.h"
+#include "_SPvpRoomEnermyInfo.h"
+#include "_SPvpAttackFlag.h"
 
 
 class Dispatch
@@ -103,6 +107,38 @@ public:
 			serMsg.ParseFromString(data);
 
 			_CharacterPos().process(serMsg);
+		}
+
+		else if (id == 1028)
+		{
+			SRequestPvpRooms serMsg;
+			serMsg.ParseFromString(data);
+
+			_SRequestPvpRooms().process(serMsg);
+		}
+
+		else if (id == 1031)
+		{
+			SEnterPvpRoom serMsg;
+			serMsg.ParseFromString(data);
+
+			_SEnterPvpRoom().process(serMsg);
+		}
+
+		else if (id == 1032)
+		{
+			SPvpRoomEnermyInfo serMsg;
+			serMsg.ParseFromString(data);
+
+			_SPvpRoomEnermyInfo().process(serMsg);
+		}
+
+		else if (id == 1033)
+		{
+			SPvpAttackFlag serMsg;
+			serMsg.ParseFromString(data);
+
+			_SPvpAttackFlag().process(serMsg);
 		}
 	}
 };

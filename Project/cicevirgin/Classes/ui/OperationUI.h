@@ -22,7 +22,7 @@ private:
 	void onRank(Ref* pSender, Widget::TouchEventType type);
 	void onRoleShow(Ref* pSender, Widget::TouchEventType type);
 	void onTaskShow(Ref* pSender, Widget::TouchEventType type);
-
+	void onPvpShow(Ref* pSender, Widget::TouchEventType type);
 
 	void scheduleUpdateUI(float dt);
 

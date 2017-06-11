@@ -8,6 +8,7 @@
 #include "Rank.h"
 #include "RoleShow.h"
 #include "TaskUI.h"
+#include "PvpShowUI.h"
 
 
 
@@ -27,6 +28,7 @@ private:
 	CC_SYNTHESIZE_READONLY(RankUI *, m_RankUI, RankUI);
 	CC_SYNTHESIZE_READONLY(RoleShowUI *, m_RoleShowUI, RoleShowUI);
 	CC_SYNTHESIZE_READONLY(TaskUI *, m_taskUI, TaskUI);
+	CC_SYNTHESIZE_READONLY(PvpShowUI *, m_pvpShowUI, PvpShowUI);
 
 public:
 	CREATE_FUNC(GameInfoUI);
