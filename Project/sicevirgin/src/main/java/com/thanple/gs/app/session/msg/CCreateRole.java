@@ -80,8 +80,8 @@ public class CCreateRole extends
                 user.setBody(body);
                 user.setHair(hair);
                 user.setWeapon(weapon);
-                user.setMoney(200);
-                user.setNskills(20);
+                user.setMoney(400);
+                user.setNskills(30);
                 user.setExp(0);
 
                 userTable.save(roleId,user);

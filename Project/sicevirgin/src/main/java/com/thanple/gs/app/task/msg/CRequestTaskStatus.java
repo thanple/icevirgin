@@ -2,9 +2,12 @@ package com.thanple.gs.app.task.msg;
 
 import com.thanple.gs.app.session.user.Onlines;
 import com.thanple.gs.app.session.user.Session;
+import com.thanple.gs.app.user.proc.PGetUserInfo;
 import com.thanple.gs.common.berkeleydb.Procedure;
 import com.thanple.gs.common.berkeleydb.entity.StatusMap;
+import com.thanple.gs.common.berkeleydb.entity.User;
 import com.thanple.gs.common.berkeleydb.table.StatusMapTable;
+import com.thanple.gs.common.berkeleydb.table.UserTable;
 import com.thanple.gs.common.nio.protocol._SRequestTaskStatus;
 import com.thanple.gs.common.provider.TableLoader;
 
@@ -48,6 +51,29 @@ public class CRequestTaskStatus extends
                 if(status == null) {
                     status = 0;
                     statusMap.getStatusTypeMapMap().put(protocolBean.getType(),status);
+
+
+                    User user = TableLoader.getTableInstance(UserTable.class).get(roleId);
+
+
+                   switch (protocolBean.getType()) {
+                       case 1:
+                           user.setNskills(user.getNskills() + 20);
+                           break;
+                       case 2:
+                           break;
+                       case 3:
+                           break;
+                       case 4:
+                           break;
+                       case 5:
+                           break;
+                       case 6:
+                           break;
+                       default: break;
+                   }
+
+                    pexecuteWhileCommit(new PGetUserInfo(roleId));
                 }
 
                 _SRequestTaskStatus.SRequestTaskStatus.Builder builder = _SRequestTaskStatus.SRequestTaskStatus.newBuilder();

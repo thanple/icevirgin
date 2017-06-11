@@ -36,4 +36,13 @@
 	<Protocol>com.thanple.gs.app.session.msg.CCharacterPos</Protocol><!-- 1026 -->
 
 
+	<Protocol>com.thanple.gs.app.fight.msg.CRequestPvpRooms</Protocol><!-- 1027 -->
+	<Protocol>com.thanple.gs.app.fight.msg.SRequestPvpRooms</Protocol><!-- 1028 -->
+
+	<Protocol>com.thanple.gs.app.fight.msg.CDestroyRoom</Protocol><!-- 1029 -->
+	<Protocol>com.thanple.gs.app.fight.msg.CEnterPvpRoom</Protocol><!-- 1030 -->
+	<Protocol>com.thanple.gs.app.fight.msg.SEnterPvpRoom</Protocol><!-- 1031 -->
+	<Protocol>com.thanple.gs.app.fight.msg.SPvpRoomEnermyInfo</Protocol><!-- 1032 -->
+	<Protocol>com.thanple.gs.app.fight.msg.SPvpAttackFlag</Protocol><!-- 1033 -->
+
 </Coder>

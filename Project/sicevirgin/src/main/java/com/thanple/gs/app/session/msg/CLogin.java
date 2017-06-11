@@ -53,7 +53,7 @@ public class CLogin extends
                 //去User表验证
                 Long roleId = (Long)numberIdMap.getMap().get(number);
                 User user = TableLoader.getTableInstance(UserTable.class).get(roleId);
-                if(password.equals(user.getPassword())) {
+                if(!password.equals(user.getPassword())) {
                     ToastUtil.show(ctx,"密码错误");
                     return true;
                 }

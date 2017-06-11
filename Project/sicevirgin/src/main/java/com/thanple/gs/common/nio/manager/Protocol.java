@@ -26,7 +26,8 @@ public abstract class Protocol <T extends com.google.protobuf.MessageLite>{
         builder.setId(ProtocolLoader.getInstance().getClassProtocolmap().get(serverMsg.getClass().getSimpleName()));
         builder.setMsg(serverMsg.toByteString());
 
-        System.out.print("[协议"+serverMsg.getClass() + "] " + serverMsg);
+        if(builder.getId() != 1025)
+            System.out.print("[协议"+serverMsg.getClass() + "] " + serverMsg);
         //写入通道
         ctx.writeAndFlush(builder.build());
     }

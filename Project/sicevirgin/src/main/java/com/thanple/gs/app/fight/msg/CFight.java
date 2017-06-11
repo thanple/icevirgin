@@ -2,6 +2,7 @@ package com.thanple.gs.app.fight.msg;
 
 import com.thanple.gs.app.fight.FightConst;
 import com.thanple.gs.app.fight.proc.PMonsterProc;
+import com.thanple.gs.app.fight.proc.PPvpProc;
 import com.thanple.gs.app.session.user.Onlines;
 import com.thanple.gs.app.session.user.Session;
 
@@ -30,7 +31,7 @@ public class CFight extends
         if(protocolBean.getFighthType() == FightConst.FIGHT_TYPE_MONSTER){
             new PMonsterProc(roleId,skillType,fighterId).submit();
         }else{
-
+            new PPvpProc(roleId,skillType).submit();
         }
     }
 }

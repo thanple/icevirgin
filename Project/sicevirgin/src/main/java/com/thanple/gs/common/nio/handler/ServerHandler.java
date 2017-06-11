@@ -8,8 +8,10 @@ import com.thanple.gs.app.session.user.PRemoveCharacter;
 import com.thanple.gs.app.session.user.Session;
 import com.thanple.gs.app.user.UserConst;
 import com.thanple.gs.common.berkeleydb.Procedure;
+import com.thanple.gs.common.berkeleydb.entity.PropertiesMap;
 import com.thanple.gs.common.berkeleydb.entity.User;
 import com.thanple.gs.common.berkeleydb.table.ItemTable;
+import com.thanple.gs.common.berkeleydb.table.PropertiesMapTable;
 import com.thanple.gs.common.berkeleydb.table.UserTable;
 import com.thanple.gs.common.nio.manager.Protocol;
 import com.thanple.gs.common.nio.manager._GameServerCMsg;
@@ -49,38 +51,68 @@ public class ServerHandler extends ChannelHandlerAdapter {
         Class<? extends Protocol> logicProtocolCls = ProtocolLoader.getInstance().getProtocolByName(messageLite.getClass().getSimpleName()).getUser();
         Protocol obj = logicProtocolCls.getConstructor(protocolCls).newInstance(messageLite);
 
-        System.out.print("[协议"+messageLite.getClass()+"] " + messageLite);
+        if(id != 1026)
+            System.out.print("[协议"+messageLite.getClass()+"] " + messageLite);
 
-    /*
+
+        /*
         if(Onlines.findUserId(new Session(ctx)) == -1){
 
-            Onlines.insertUserSession(4097L,new Session(ctx));
+            if(!Onlines.getUserSession().containsKey(4097L)) {
+                Onlines.insertUserSession(4097L,new Session(ctx));
 
-            new Procedure() {
-                @Override
-                protected boolean process() {
+                new Procedure() {
+                    @Override
+                    protected boolean process() {
 
-                    //user属性表
-                    UserTable userTable = TableLoader.getTableInstance(UserTable.class);
-                    User user = new User();
-                    user.setId(4097L);
-                    user.setMoney(200);
-                    user.setNskills(20);
-                    user.setName("步惊云");
-                    user.setNumber("806585542");
+                        //user属性表
+                        UserTable userTable = TableLoader.getTableInstance(UserTable.class);
+                        User user = new User();
+                        user.setId(4097L);
+                        user.setMoney(200);
+                        user.setNskills(40);
+                        user.setName("步惊云");
+                        user.setNumber("806585542");
 
-                    user.setHair(UserConst.Hair_11002);
-                    user.setWeapon(UserConst.Weapon_14000);
-                    user.setBody(UserConst.PLAYER_11002);
+                        user.setHair(UserConst.Hair_11002);
+                        user.setWeapon(UserConst.Weapon_14000);
+                        user.setBody(UserConst.PLAYER_11002);
 
-                    userTable.save(4097L,user);
+                        userTable.save(4097L,user);
 
-                    return true;
-                }
-            }.submit();
+                        return true;
+                    }
+                }.submit();
+            }else {
+                Onlines.insertUserSession(4098L,new Session(ctx));
 
-        }
-*/
+                new Procedure() {
+                    @Override
+                    protected boolean process() {
+
+                        //user属性表
+                        UserTable userTable = TableLoader.getTableInstance(UserTable.class);
+                        User user = new User();
+                        user.setId(4098L);
+                        user.setMoney(200);
+                        user.setNskills(40);
+                        user.setName("步惊云2");
+                        user.setNumber("806585542");
+
+                        user.setHair(UserConst.Hair_11002);
+                        user.setWeapon(UserConst.Weapon_14000);
+                        user.setBody(UserConst.PLAYER_14002);
+
+                        userTable.save(4098L,user);
+
+                        return true;
+                    }
+                }.submit();
+            }
+
+
+        }*/
+
 
 
         //反射得到的协议分发业务方法
@@ -108,6 +140,13 @@ public class ServerHandler extends ChannelHandlerAdapter {
                     User user = TableLoader.getTableInstance(UserTable.class).select(Onlines.getSessionUser().get(new Session((ctx))));
                     System.out.println("[离线]:玩家"+user+" 已经下线...");
                     Onlines.removeUser(user.getId());
+
+                    //竞技场房间清除
+                    PropertiesMapTable propertiesMapTable = TableLoader.getTableInstance(PropertiesMapTable.class);
+                    PropertiesMap roleInstance = propertiesMapTable.get(PropertiesMap.RoleidInstanceidMap);
+                    if(null != roleInstance && roleInstance.getMap().containsKey(user.getId())) {
+                        roleInstance.getMap().remove(user.getId());
+                    }
 
                     //通知下线的玩家数据给上线玩家，以终止数据同步
                     pexecuteWhileCommit(new PRemoveCharacter(user.getId()));

@@ -85,7 +85,7 @@ public class PMonsterProc extends Procedure{
             }
 
             //再看怪物的防御力
-            decrease -= monsterDefence * 0.4;
+            decrease -= monsterDefence * 0.3;
             if(decrease <= 0) {
                 decrease = 20;
             }
